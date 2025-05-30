@@ -7,3 +7,8 @@ Players take turns dropping pieces; first to connect four wins. Supports reset, 
 
 ```bash
 python start_collect_four_game.py [--rows ROWS] [--columns COLUMNS] [--players NUM_PLAYERS]
+
+## To run tests
+
+```bash
+pytest test_game.py
