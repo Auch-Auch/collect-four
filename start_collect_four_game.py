@@ -9,12 +9,12 @@ PLACEHOLDER = "."
 
 
 class Player(str, Enum):
-    RED = 'R'
-    YELLOW = 'Y'
-    GREEN = 'G'
-    BLUE = 'B'
-    PURPLE = 'P'
-    ORANGE = 'O'
+    RED = "R"
+    YELLOW = "Y"
+    GREEN = "G"
+    BLUE = "B"
+    PURPLE = "P"
+    ORANGE = "O"
 
 
 class Board:
@@ -24,7 +24,11 @@ class Board:
         self._board = [[PLACEHOLDER for _ in range(columns)] for _ in range(rows)]
 
     def update_board(self, column: int, player: Player) -> bool:
-        if column < 0 or column >= self.columns or self._board[0][column] != PLACEHOLDER:
+        if (
+            column < 0
+            or column >= self.columns
+            or self._board[0][column] != PLACEHOLDER
+        ):
             return False
         for row in reversed(range(self.rows)):
             if self._board[row][column] == PLACEHOLDER:
@@ -34,13 +38,15 @@ class Board:
 
     def __getitem__(self, row_index):
         return self._board[row_index]
-    
+
     def __str__(self):
-        rows = [' '.join(row) for row in self._board]
-        return '\n'.join(rows) + '\n' + ' '.join(map(str, range(self.columns)))
+        rows = [" ".join(row) for row in self._board]
+        return "\n".join(rows) + "\n" + " ".join(map(str, range(self.columns)))
 
     def reset(self) -> None:
-        self._board = [[PLACEHOLDER for _ in range(self.columns)] for _ in range(self.rows)]
+        self._board = [
+            [PLACEHOLDER for _ in range(self.columns)] for _ in range(self.rows)
+        ]
 
 
 def init_board(rows=ROWS, columns=COLUMNS) -> Board:
@@ -91,7 +97,9 @@ def get_players(num_of_players: int = NUM_PLAYERS) -> list[Player]:
 
 
 def start_game_loop(args: ArgumentParser) -> None:
-    print("You are playing Connect Four! Two players RED and YELLOW take turns dropping pieces into the board. The first player to get four in a row wins.")
+    print(
+        "You are playing Connect Four! Two players RED and YELLOW take turns dropping pieces into the board. The first player to get four in a row wins."
+    )
     board = init_board(args.rows, args.columns)
     players = get_players(args.players)
     if not players:
@@ -103,7 +111,11 @@ def start_game_loop(args: ArgumentParser) -> None:
             print(board)
             current_player = players[turn % len(players)]
             try:
-                column = int(input(f"Player {current_player.name}, choose a column (0-{board.columns - 1}): "))
+                column = int(
+                    input(
+                        f"Player {current_player.name}, choose a column (0-{board.columns - 1}): "
+                    )
+                )
             except ValueError:
                 print("Invalid number.")
                 continue
@@ -137,16 +149,20 @@ def start_game_loop(args: ArgumentParser) -> None:
             print("\nGame ended. Goodbye!")
             return
 
-        if again != 'y':
+        if again != "y":
             print("Thanks for playing!")
             break
 
 
 def main():
     arg_parser = ArgumentParser("Connect Four game")
-    arg_parser.add_argument("--columns", type=int, default=COLUMNS, help="Number of columns")
+    arg_parser.add_argument(
+        "--columns", type=int, default=COLUMNS, help="Number of columns"
+    )
     arg_parser.add_argument("--rows", type=int, default=ROWS, help="Number of rows")
-    arg_parser.add_argument("--players", type=int, default=NUM_PLAYERS, help="Number of players")
+    arg_parser.add_argument(
+        "--players", type=int, default=NUM_PLAYERS, help="Number of players"
+    )
     args = arg_parser.parse_args()
     start_game_loop(args)
 

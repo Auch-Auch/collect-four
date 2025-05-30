@@ -10,6 +10,8 @@ pluggy==1.6.0
     # via pytest
 pytest==8.3.5
     # via collect-four-game (pyproject.toml)
+ruff==0.11.12
+    # via collect-four-game (pyproject.toml)
 tomli==2.2.1
     # via pytest
 typing-extensions==4.13.2

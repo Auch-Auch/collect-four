@@ -1,12 +1,13 @@
 from start_collect_four_game import Board, Player, is_player_won, is_draw
 
+
 def test_board_initialization():
     board = Board()
     assert board.rows == 6
     assert board.columns == 7
 
     for row in board._board:
-        assert all(cell == '.' for cell in row)
+        assert all(cell == "." for cell in row)
 
 
 def test_update_board():
