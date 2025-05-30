@@ -1,7 +1,7 @@
 [project]
-name = "explore-uv"
+name = "collect_four_game"
 version = "0.1.0"
-description = "Add your description here"
+description = "Collect four game for multiple players with gravitation"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
