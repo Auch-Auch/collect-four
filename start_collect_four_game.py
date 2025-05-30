@@ -1,5 +1,5 @@
 from enum import Enum
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 
 
 NUM_PLAYERS = 2
@@ -18,7 +18,7 @@ class Player(str, Enum):
 
 
 class Board:
-    def __init__(self, rows=ROWS, columns=COLUMNS):
+    def __init__(self, rows: int = ROWS, columns: int = COLUMNS):
         self.rows = rows
         self.columns = columns
         self._board = [[PLACEHOLDER for _ in range(columns)] for _ in range(rows)]
@@ -36,10 +36,10 @@ class Board:
                 return True
         return False
 
-    def __getitem__(self, row_index):
+    def __getitem__(self, row_index: int) -> list[str]:
         return self._board[row_index]
 
-    def __str__(self):
+    def __str__(self) -> str:
         rows = [" ".join(row) for row in self._board]
         return "\n".join(rows) + "\n" + " ".join(map(str, range(self.columns)))
 
@@ -49,7 +49,7 @@ class Board:
         ]
 
 
-def init_board(rows=ROWS, columns=COLUMNS) -> Board:
+def init_board(rows: int = ROWS, columns: int = COLUMNS) -> Board:
     return Board(rows, columns)
 
 
@@ -96,7 +96,7 @@ def get_players(num_of_players: int = NUM_PLAYERS) -> list[Player]:
     return players
 
 
-def start_game_loop(args: ArgumentParser) -> None:
+def start_game_loop(args: Namespace) -> None:
     print(
         "You are playing Connect Four! Two players RED and YELLOW take turns dropping pieces into the board. The first player to get four in a row wins."
     )
